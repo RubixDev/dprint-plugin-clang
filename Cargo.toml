@@ -1,0 +1,22 @@
+[workspace]
+members = ["xtask"]
+
+[package]
+name = "dprint-plugin-clang"
+version = "0.1.0"
+authors = ["RubixDev"]
+categories = ["development-tools"]
+edition = "2021"
+keywords = ["formatting", "formatter", "clang", "dprint"]
+license = "GPL-3.0-only"
+repository = "https://github.com/RubixDev/dprint-plugin-clang"
+description = "A dprint plugin for the clang-format tool"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.66"
+dprint-core = { version = "0.59.0", features = ["process"] }
+serde = { version = "1.0.147", features = ["derive"] }
+tokio = { version = "1.21.2", features = ["rt", "rt-multi-thread", "time", "macros"] }
+tokio-util = "0.7.4"

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 2,
+  "kind": "process",
+  "name": "dprint-plugin-clang",
+  "version": "0.1.0",
+  "linux-x86_64": {
+    "reference": "/home/silas/Coding/Rust/dprint-plugin-clang/dprint-plugin-clang.zip",
+    "checksum": "c24769191ae8facb788b4b5efd0fe00be9217b85dcd81c155fafe12f82066bdb"
+  }
+}
