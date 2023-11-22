@@ -6,6 +6,7 @@ use std::{
     process,
 };
 
+use anyhow::Result;
 use once_cell::sync::Lazy;
 use serde::Deserialize;
 
@@ -26,8 +27,6 @@ static WORKSPACE_CONFIG: Lazy<Cargo> = Lazy::new(|| {
     }
 });
 
-pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
-
 #[derive(Deserialize)]
 struct Cargo {
     package: Package,
@@ -40,14 +39,7 @@ struct Package {
     repository: String,
 }
 
-fn main() {
-    if let Err(e) = try_main() {
-        eprintln!("{e}");
-        process::exit(-1);
-    }
-}
-
-fn try_main() -> Result<()> {
+fn main() -> Result<()> {
     let task = env::args().nth(1);
     match task.as_deref() {
         Some("package") => package::main()?,

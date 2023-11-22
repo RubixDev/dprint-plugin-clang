@@ -3,7 +3,7 @@ members = ["xtask"]
 
 [package]
 name = "dprint-plugin-clang"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["RubixDev"]
 categories = ["development-tools"]
 edition = "2021"
@@ -15,8 +15,8 @@ description = "A dprint plugin for the clang-format tool"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-anyhow = "1.0.66"
-dprint-core = { version = "0.59.0", features = ["process"] }
-serde = { version = "1.0.147", features = ["derive"] }
-tokio = { version = "1.21.2", features = ["rt", "rt-multi-thread", "time", "macros"] }
-tokio-util = "0.7.4"
+anyhow = "1.0.75"
+dprint-core = { version = "0.63.3", features = ["process"] }
+serde = { version = "1.0.193", features = ["derive"] }
+tokio = { version = "1.34.0", features = ["rt", "rt-multi-thread", "time", "macros", "process", "io-util"] }
+tokio-util = "0.7.10"

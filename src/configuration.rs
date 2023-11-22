@@ -1,6 +1,6 @@
-use dprint_core::configuration::{
-    self, ConfigKeyMap, ConfigKeyValue, GlobalConfiguration, NewLineKind,
-    ResolveConfigurationResult,
+use dprint_core::{
+    configuration::{self, ConfigKeyMap, ConfigKeyValue, GlobalConfiguration, NewLineKind},
+    plugins::{FileMatchingInfo, PluginResolveConfigurationResult},
 };
 
 #[derive(Clone, serde::Serialize)]
@@ -60,7 +60,7 @@ fn config_key_value_to_string(value: &ConfigKeyValue) -> String {
 pub fn resolve_config(
     mut config: ConfigKeyMap,
     global_config: &GlobalConfiguration,
-) -> ResolveConfigurationResult<Configuration> {
+) -> PluginResolveConfigurationResult<Configuration> {
     let mut diagnostics = vec![];
     let mut settings = ConfigKeyMap::new();
 
@@ -104,11 +104,47 @@ pub fn resolve_config(
 
     settings.extend(config);
 
-    ResolveConfigurationResult {
+    PluginResolveConfigurationResult {
         diagnostics,
         config: Configuration {
             new_line_kind,
             settings,
+        },
+        file_matching: FileMatchingInfo {
+            file_extensions: [
+                "cs",
+                "java",
+                "mjs",
+                "js",
+                "ts",
+                "json",
+                "m",
+                "mm",
+                "proto",
+                "protodevel",
+                "td",
+                "textpb",
+                "pb.txt",
+                "textproto",
+                "asciipb",
+                "ssv",
+                "svh",
+                "v",
+                "vh",
+                "c",
+                "h",
+                "cc",
+                "hh",
+                "cpp",
+                "hpp",
+                "c++",
+                "C",
+                "cxx",
+            ]
+            .into_iter()
+            .map(|ext| ext.to_string())
+            .collect(),
+            file_names: vec![],
         },
     }
 }

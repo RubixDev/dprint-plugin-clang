@@ -4,9 +4,10 @@ use std::{
     process::Command,
 };
 
+use anyhow::{Result, bail};
 use serde_json::{json, Map, Value};
 
-use crate::{project_root, Result, WORKSPACE_CONFIG};
+use crate::{project_root, WORKSPACE_CONFIG};
 
 const TARGETS: &[(&str, &str)] = &[
     ("linux-x86_64", "x86_64-unknown-linux-musl"),
@@ -30,12 +31,12 @@ pub fn main() -> Result<()> {
     for (platform, target) in TARGETS {
         eprintln!("Compiling for target {target}...");
 
-        let status = Command::new("cross")
+        let status = Command::new(env!("CARGO"))
             .current_dir(project_root())
-            .args(&["build", "--release", "--target", target])
+            .args(["build", "--release", "--target", target])
             .status()?;
         if !status.success() {
-            Err(format!("cargo build for target {target} failed"))?;
+            bail!("cargo build for target {target} failed");
         }
 
         let build_dir = build_dir(target);
